@@ -1,0 +1,103 @@
+---
+title: "Exercicio-Parte3-Cap11"
+author: "Vanderlei Oliveira"
+date: "3/12/2021"
+output: html_document
+---
+
+# Definindo o Problema: Analisando dados das casas de Boston, nos EUA e fazendo previsoes.
+
+# The Boston Housing Dataset
+# http://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html
+
+# Seu modelo deve prever a MEDV (Valor da Mediana de ocupação das casas). Utilize um modelo de rede neural!
+
+# Carregando o pacote MASS
+
+```{r}
+  library(MASS)
+```
+
+# Importando os dados do dataset Boston
+```{r}
+set.seed(101)
+dados <- Boston
+head(dados)
+View(dados)
+```
+
+
+# Resumo dos dados
+```{r}
+str(dados)
+summary(dados)
+any(is.na(dados))
+```
+
+
+# Carregando o pacote para Redes Neurais
+```{r}
+library(neuralnet)
+```
+
+
+# Pré-processamento e amostragem
+
+# Função de padronização
+```{r}
+padronizar <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+```
+
+
+# Padronizando
+```{r}
+dados_p <- as.data.frame(lapply(dados, padronizar))
+head(dados_p)
+```
+
+
+# Função de voltar ao normal (medv)
+```{r}
+voltar <- function(x){
+  return((x*(max(dados$medv)-min(dados$medv)))+min(dados$medv))
+}
+```
+
+
+# Amostragem e divisão entre dados de treino e teste
+```{r}
+library(dplyr)
+dtreino <- dados_p %>% slice_sample(prop = 0.75,replace = F)
+dteste <- setdiff(dados_p,dtreino)
+head(dtreino)
+```
+
+
+# Criação do modelo
+
+```{r}
+modelo1 <- neuralnet(medv~.,data = dtreino)
+modelo1$weights
+modelo1$result.matrix
+gwplot(modelo1)
+plot(modelo1)
+```
+
+# Fazendo a previsão
+```{r}
+dteste$medv_previsto <- predict(modelo1,dteste)
+dteste$medv <- dteste$medv %>% voltar()
+dteste$medv_previsto <- dteste$medv_previsto %>% voltar()
+dteste$Erro <- abs(dteste$medv - dteste$medv_previsto)*100/dteste$medv
+dteste$Erro <- round(dteste$Erro,digits = 2)
+dteste$Erro <- paste(dteste$Erro,'%')
+dteste
+barplot(dteste$medv,dteste$medv_previsto,col = c('skyblue','brown'),main = 'Previsão do Medv',legend.text = T)
+legend('topright',legend = c('Medv real','Medv previsto'), fill = c('skyblue','brown'))
+```
+
+# Valores mais próximos da média são previstos com menor erro
+
+
