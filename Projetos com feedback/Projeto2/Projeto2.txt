@@ -1,0 +1,1 @@
+ Projeto2 do curso de Big Data Analytics com R e Azure ML da Data Science Academy, pertencente à formação Cientista de Dados.
