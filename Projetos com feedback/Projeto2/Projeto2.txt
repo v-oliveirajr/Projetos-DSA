@@ -1,10 +1,11 @@
  Projeto2 do curso de Big Data Analytics com R e Azure ML da Data Science Academy, pertencente à formação Cientista de Dados.
  
 Os dados de treino foram obtidos no site: https://www.kaggle.com/c/grupo-bimbo-inventory-demand/discussion, foi realizada uma amostragem de 10 milhões de dados do arquivo
-train.csv.
+train.csv. Essa amostra encontra-se neste link: https://drive.google.com/file/d/1-uK2B2Idm--upFTpIoc5gGY_DHqEGCv0/view?usp=sharing
 
 Realizou-se uma categorização dos dados relacionados aos produtos, porém observou-se que existe uma quantidade muito grande de outliers, visto que a maior parte das vendas eram
 feitas em pequenas quantidades mas também existiam muitas vendas (provavelmente para atacado) de centenas e até milhares de unidades de um mesmo produto, podendo prejudicar muito
 a eficiência de um modelo de regressão para previsão da quantidade a ser vendida na próxima semana, de acordo com a análise exploratória realizada depois da categorização. Também
-foi encontrada dificuldade para categorizar a tabela town_state visto que não se teve de maneira clara uma característica em comum entre a massa de dados para localização das
+foi encontrada dificuldade para categorizar a tabela cliente_tabla visto que não se teve de maneira clara uma característica em comum entre a massa de dados para localização das
 vendas.
+
