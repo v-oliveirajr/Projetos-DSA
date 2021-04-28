@@ -9,3 +9,5 @@ a eficiência de um modelo de regressão para previsão da quantidade a ser vend
 foi encontrada dificuldade para categorizar a tabela cliente_tabla visto que não se teve de maneira clara uma característica em comum entre a massa de dados para localização das
 vendas.
 
+O arquivo de amostras após a categorização encontra-se neste link: https://drive.google.com/file/d/1_3rY9ugLnjZUYRu9N5eP8tLnUIUZzWzO/view?usp=sharing
+
